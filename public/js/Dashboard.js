@@ -100,25 +100,39 @@ function makeGraphs(error, apiData, statesJson) {
 			circleSize = circleSize;
 		//Change the color of the circle depending on type
 		circleColor = '#fecc5c';
+                className = 'normal';
 		
-		if (d.resource_type == 'Supplies')
-			circleColor = '#9ecae1';
-		else if (d.resource_type == 'Technology')
-			circleColor = '#deebf7';
-		else if (d.resource_type == 'Books')
-			circleColor = '#4292c6';
-		else if (d.resource_type == 'Other')
-			circleColor = '#6baed6';
-		else if (d.resource_type == 'Trips')
-			circleColor = '#f03b20';
-		else if (d.resource_type == 'Visitors')
-			circleColor = '#fd8d3c';
+                if (d.resource_type == 'Supplies') {
+                  circleColor = '#9ecae1';
+                  className = 'supplies';
+                }
+                else if (d.resource_type == 'Technology') {
+                  circleColor = '#deebf7';
+                  className = 'technology';
+                }
+                else if (d.resource_type == 'Books') {
+                  circleColor = '#4292c6';
+                  className = 'books';
+                }
+                else if (d.resource_type == 'Other') {
+                  circleColor = '#6baed6';
+                  className = 'other';
+                }
+                else if (d.resource_type == 'Trips') {
+                  circleColor = '#f03b20';
+                  className = 'trips'
+                }
+                else if (d.resource_type == 'Visitors') {
+                  circleColor = '#fd8d3c';
+                  className = 'visitors'
+                }
 		
 		
 	  circle = L.circle([d.school_latitude, d.school_longitude], circleSize, {
 		color: circleColor,
 		fillColor: circleColor,
-		fillOpacity: 0.5
+		fillOpacity: 0.5,
+                className: className
 	  }).addTo(theMap);	
 	  circle.bindPopup("School City: " + d.school_city + "<br>Resource Type: " + d.resource_type + "<br>Funding Status: " + d.funding_status + "<br>Request Amount: " + d.total_price_including_optional_support);
 	  layerPoints.addLayer(circle);
