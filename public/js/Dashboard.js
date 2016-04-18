@@ -134,7 +134,7 @@ function makeGraphs(error, apiData, statesJson) {
 		fillOpacity: 0.5,
                 className: className
 	  }).addTo(theMap);	
-	  circle.bindPopup("School City: " + d.school_city + "<br>Resource Type: " + d.resource_type + "<br>Funding Status: " + d.funding_status + "<br>Request Amount: " + d.total_price_including_optional_support);
+	  circle.bindPopup("School City: " + d.school_city + "<br>Resource Type: " + d.resource_type + "<br>Funding Status: " + d.funding_status + "<br>Request Amount: $" + d.total_price_including_optional_support.toFixed(2));
 	  layerPoints.addLayer(circle);
 	}
 	function renderPoints(points) {
