@@ -71,7 +71,7 @@ transform: translateX(-50%);
 
 
         #total-projects {
-                background: #33CC99;
+                background: #fecc5c;
                 width: 200px;
                 position:relative;
                 height:60px;
@@ -84,7 +84,7 @@ transform: translateX(-50%);
             }
 
         #net-donations {
-                background: #33CC99;
+                background: #fecc5c;
                 width: 200px;
                 position:relative;
                 height:60px;
@@ -95,8 +95,18 @@ transform: translateX(-50%);
                 padding-top: 12px;
                 padding-bottom: 0px;
             }
-        .dc-select-menu {
-                background: #33CC99;
+        #percent-net-donations {
+                background: #fecc5c;
+                position:relative;
+                height:60px;
+                font-size: 29px;
+                color: white;
+                vertical-align: middle;
+                text-align: center;
+                padding-top: 12px;
+                padding-bottom: 0px;
+            }        .dc-select-menu {
+                background: #fecc5c;
                 width: 80%;
                 border:none;
                 position:relative;

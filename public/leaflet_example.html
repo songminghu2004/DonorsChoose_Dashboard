@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Leaflet Example</title>
+	<link rel="stylesheet" href="assets/leaflet/leaflet.css">
+</head>
+
+<body>
+	<span style="font-size:20px; font-weight: bold">Baseball Stadiums by State Population Density</span>
+	<div id="mymap" style="height:500px;">
+	</div>
+
+	<script src="assets/leaflet/leaflet.js">
+	</script>
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+	<script src="counties_population.js">
+	</script>
+	<script>
+	var theMap=L.map('mymap').setView([37.8, -96], 4);
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	attribution: 'Map data &copy <a href="http://openstreetmap.org>OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">, Imagery <a href="http://mapbox.com">Mapbox</a>',
+	id: 'mapbox.light',
+	maxZoom: 18,
+	accessToken: 'pk.eyJ1IjoibW5ldWhhcmQiLCJhIjoiY2ltczBpNGlyMDFkZHdrbHVlOWtoMXduNiJ9.rWeQjjn_Fbq4K3tSYF7fvA',
+	
+	}).addTo(theMap);
+	
+
+	//L.geoJson(point).addTo(theMap);
+	function style(feature) {
+		return {
+			fillColor: getColor(feature.properties.PEP_2015_PEPANNRES_with_ann_respop72015),
+			weight: .5,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7
+		};
+	}	
+	
+	function getColor(d) {
+		return 	d > 1500000 ? '#023858' :
+				d > 1250000 ? '#045a8d' :
+				d > 1000000 ? '#0570b0' :
+				d > 750000 ? '#3690c0' :
+				d > 500000 ? '#74a9cf' :
+				d > 250000 ? '#a6bddb' :
+				d > 100000 ? '#d0d1e6' :
+				d > 50000 ? '#ece7f2' :
+				'#fff7fb' ;		
+					  
+	}
+	
+	omnivore.csv('baseball_stadiums.csv').addTo(theMap);
+	
+	L.geoJson(countyData, {style: style}).addTo(theMap)
+	</script>
+</body>
+</html>
+
