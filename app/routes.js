@@ -15,7 +15,7 @@ module.exports = function(app) {
    if (err) 
    res.send(err);
     res.json(subjectDetails); // return all nerds in JSON format
-  });
+  }).limit(5000);
  });
 
  

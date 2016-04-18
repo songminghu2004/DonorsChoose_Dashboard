@@ -688,7 +688,7 @@ dc.baseMixin = function (_chart) {
     var _renderLabel = true;
 
     var _title = function (d) {
-        return _chart.keyAccessor()(d) + ': ' + _chart.valueAccessor()(d);
+        return _chart.keyAccessor()(d);// + ': ' + _chart.valueAccessor()(d);
     };
     var _renderTitle = true;
 
