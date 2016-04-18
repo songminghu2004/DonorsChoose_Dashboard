@@ -18,11 +18,18 @@ function makeGraphs(error, apiData, statesJson) {
 	
 //Start Transformations
 	var dataSet = apiData;
-	var dateFormat = d3.time.format("%Y-%m-%d %H:%M:%S");
+	console.log(dataSet);
+	var dateFormat = d3.time.format("%m/%d/%Y %H:%M,");
 	dataSet.forEach(function(d) {
+		if (d.date_posted === 'null')
+			console.log(d.date_posted)
+		else
+		{
 		d.date_posted = dateFormat.parse(d.date_posted);
-				d.date_posted.setDate(1);
+				//console.log(d.date_posted);
+				//d.date_posted.setDate(1);
 		d.total_donations = +d.total_donations;
+		}
 	});
 	console.log(dataSet);
 
@@ -82,39 +89,50 @@ function makeGraphs(error, apiData, statesJson) {
 	
 	var netTotalDonations = ndx.groupAll().reduceSum(function(d) {return d.total_donations;});
 	var netTotVal = netTotalDonations.value();
-	//alert(netTotVal);
-	//var latitude = schoolLatitude.top(Infinity);
-	
-	/*
-	for(var i in schoolLatitudeGroup.top(Infinity)){
-		alert(i); // alerts key
-		alert(schoolLatitudeGroup[i]); //alerts key's value
-	}
-	*/
-	
-	//var latitude = schoolLatitude.dimension(function(d) { return d.school_latitidue; });
-	//alert(latitude)
-        var layerPoints = new L.LayerGroup();
 
-        function renderCircle(d) {
-          circle = L.circle([d.school_latitude, d.school_longitude], 30, {
-            color: '#fecc5c',
-            fillColor: '#fecc5c',
-            fillOpacity: 0.5
-          }).addTo(theMap);	
-          circle.bindPopup("School City: " + d.school_city + "<br>Resource Type: " + d.resource_type + "<br>Funding Status: " + d.funding_status);
-          layerPoints.addLayer(circle);
-        }
-        function renderPoints(points) {
-          layerPoints.eachLayer(function(l) {
-            theMap.removeLayer(l);
-          });
-          layerPoints.clearLayers();
-          points.forEach(function(d) { renderCircle(d); });
-        }
-        dataSet.slice(dataSet.length - TO_RENDER).forEach(function(d) {
-          renderCircle(d);
-        });
+	var layerPoints = new L.LayerGroup();
+
+	function renderCircle(d) {
+		circleSize = parseInt(d.total_price_including_optional_support);
+		if (circleSize < 9 || isNaN(circleSize))
+			circleSize = 10;
+		else
+			circleSize = circleSize;
+		//Change the color of the circle depending on type
+		circleColor = '#fecc5c';
+		
+		if (d.resource_type == 'Supplies')
+			circleColor = '#9ecae1';
+		else if (d.resource_type == 'Technology')
+			circleColor = '#deebf7';
+		else if (d.resource_type == 'Books')
+			circleColor = '#4292c6';
+		else if (d.resource_type == 'Other')
+			circleColor = '#6baed6';
+		else if (d.resource_type == 'Trips')
+			circleColor = '#f03b20';
+		else if (d.resource_type == 'Visitors')
+			circleColor = '#fd8d3c';
+		
+		
+	  circle = L.circle([d.school_latitude, d.school_longitude], circleSize, {
+		color: circleColor,
+		fillColor: circleColor,
+		fillOpacity: 0.5
+	  }).addTo(theMap);	
+	  circle.bindPopup("School City: " + d.school_city + "<br>Resource Type: " + d.resource_type + "<br>Funding Status: " + d.funding_status + "<br>Request Amount: " + d.total_price_including_optional_support);
+	  layerPoints.addLayer(circle);
+	}
+	function renderPoints(points) {
+	  layerPoints.eachLayer(function(l) {
+		theMap.removeLayer(l);
+	  });
+	  layerPoints.clearLayers();
+	  points.forEach(function(d) { renderCircle(d); });
+	}
+	dataSet.slice(dataSet.length - TO_RENDER).forEach(function(d) {
+	  renderCircle(d);
+	});
 	
 	
 	//Define threshold values for data
@@ -180,23 +198,6 @@ console.log(maxDate);
 		.group(netTotalDonations)
 		.formatNumber(d3.format(".0%"));
 	
-	/*	
-        .on("filtered", function(chart) { renderPoints(povertyLevel.top(TO_RENDER)); })
-	dateChart
-		//.width(600)
-		.height(220)
-		.margins({top: 10, right: 50, bottom: 30, left: 50})
-		.dimension(datePosted)
-		.group(projectsByDate)
-		.renderArea(true)
-		.transitionDuration(500)
-		.x(d3.time.scale().domain([minDate, maxDate]))
-		.elasticY(true)
-		.renderHorizontalGridLines(true)
-    	.renderVerticalGridLines(true)
-		.xAxisLabel("Year")
-		.yAxis().ticks(6);
-	*/
 	resourceTypeChart
         //.width(300)
         .height(225)
@@ -280,30 +281,6 @@ console.log(maxDate);
         .ordering(function(d){return d.value;})
         .on("filtered", function(chart) { renderPoints(state.top(TO_RENDER)); })
         .yAxis().tickFormat(d3.format("s"));
-
-/*
-	usChart.width(700)
-		.height(330)
-		.dimension(state)
-		.group(totalDonationsState)
-		.colors(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"])
-		.colorDomain([0, max_state])
-		.overlayGeoJson(statesJson["features"], "state", function (d) {
-			return d.properties.name;
-		})
-		.projection(d3.geo.albersUsa()
-    				.scale(600)
-    				.translate([340, 150]))
-		.title(function (p) {
-			var CheckVal = 'undefined';
-			checkVal = p["value"];
-			if (checkVal != 'undefined')
-			return "State: " + p["key"]
-					+ "\n"
-					+ "Total Donations: " + p["value"] + " $";
-		})
-*/
-
 
     dc.renderAll();
 
