@@ -94,14 +94,27 @@ function makeGraphs(error, apiData, statesJson) {
 	
 	//var latitude = schoolLatitude.dimension(function(d) { return d.school_latitidue; });
 	//alert(latitude)
-	dataSet.forEach(function(d) {
-		circle = L.circle([d.school_latitude, d.school_longitude], 30, {
-		color: '#fecc5c',
-		fillColor: '#fecc5c',
-		fillOpacity: 0.5
-	}).addTo(theMap);	
-	circle.bindPopup("School City: " + d.school_city + "<br>Resource Type: " + d.resource_type + "<br>Funding Status: " + d.funding_status);
-	});
+        var layerPoints = new L.LayerGroup();
+
+        function renderCircle(d) {
+          circle = L.circle([d.school_latitude, d.school_longitude], 30, {
+            color: '#fecc5c',
+            fillColor: '#fecc5c',
+            fillOpacity: 0.5
+          }).addTo(theMap);	
+          circle.bindPopup("School City: " + d.school_city + "<br>Resource Type: " + d.resource_type + "<br>Funding Status: " + d.funding_status);
+          layerPoints.addLayer(circle);
+        }
+        function renderPoints(points) {
+          layerPoints.eachLayer(function(l) {
+            theMap.removeLayer(l);
+          });
+          layerPoints.clearLayers();
+          points.forEach(function(d) { renderCircle(d); });
+        }
+        dataSet.forEach(function(d) {
+          renderCircle(d);
+        });
 	
 	
 	//Define threshold values for data
@@ -129,6 +142,7 @@ console.log(maxDate);
 	
   selectField = dc.selectMenu('#menuselect')
         .dimension(gradeLevel)
+        .on("filtered", function(chart) { renderPoints(gradeLevel.top(Infinity)); })
         .group(projectsByGrade); 
 
        dc.dataCount("#row-selection")
@@ -137,10 +151,12 @@ console.log(maxDate);
 
   selectField = dc.selectMenu('#menuselect-state')
         .dimension(state)
+        .on("filtered", function(chart) { renderPoints(state.top(Infinity)); })
         .group(stateGroup); 
 
   selectFieldResource = dc.selectMenu('#menuselect_poverty')
         .dimension(povertyLevel)
+        .on("filtered", function(chart) { renderPoints(povertyLevel.top(Infinity)); })
         .group(projectsByPovertyLevel); 
 
        dc.dataCount("#row-selection")
@@ -165,6 +181,7 @@ console.log(maxDate);
 		.formatNumber(d3.format(".0%"));
 	
 	/*	
+        .on("filtered", function(chart) { renderPoints(povertyLevel.top(Infinity)); })
 	dateChart
 		//.width(600)
 		.height(220)
@@ -186,12 +203,14 @@ console.log(maxDate);
         .dimension(resourceType)
         .group(totalDonationsResource)
         .elasticX(true)
+        .on("filtered", function(chart) { renderPoints(resourceType.top(Infinity)); })
         .xAxis().ticks(5);
 
 	povertyLevelChart
 		//.width(300)
 		.height(220)
         .dimension(povertyLevel)
+        .on("filtered", function(chart) { renderPoints(povertyLevel.top(Infinity)); })
         .group(projectsByPovertyLevel)
         .xAxis().ticks(4);
 
@@ -200,6 +219,7 @@ console.log(maxDate);
 		.height(220)
         .dimension(gradeLevel)
         .group(projectsByGrade)
+        .on("filtered", function(chart) { renderPoints(gradeLevel.top(Infinity)); })
         .xAxis().ticks(4);
 
   
@@ -210,6 +230,7 @@ console.log(maxDate);
 		.innerRadius(40)
 		.transitionDuration(1000)
 		.dimension(fundingStatus)
+        .on("filtered", function(chart) { renderPoints(fundingStatus.top(Infinity)); })
 		.group(projectsByFundingStatus);
 
 /*
@@ -238,6 +259,7 @@ console.log(maxDate);
         .renderHorizontalGridLines(true)
         .renderVerticalGridLines(true)
         .ordering(function(d){return d.value;})
+        .on("filtered", function(chart) { renderPoints(ruralUrban.top(Infinity)); })
         .yAxis().tickFormat(d3.format("s"));
 	
 		
@@ -256,6 +278,7 @@ console.log(maxDate);
         .renderHorizontalGridLines(true)
         .renderVerticalGridLines(true)
         .ordering(function(d){return d.value;})
+        .on("filtered", function(chart) { renderPoints(state.top(Infinity)); })
         .yAxis().tickFormat(d3.format("s"));
 
 /*
