@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<!--
+	Synchronous by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+<style>
+path.leaflet-clickable {
+  fill: #ffffb2;
+  fill-opacity: .2;
+}
+path.leaflet-clickable.normal{
+  fill: #fecc5c;
+}
+path.leaflet-clickable.supplies {
+  fill: #9ecae1;
+}
+path.leaflet-clickable.technology {
+  fill: #deebf7;
+}
+path.leaflet-clickable.books {
+  fill: #4292c6;
+}
+path.leaflet-clickable.other {
+  fill: #6baed6;
+}
+path.leaflet-clickable.trips {
+  fill: #f03b20;
+}
+path.leaflet-clickable.visitors{
+  fill: #fd8d3c;
+}
+</style>
+	<head>
+		<title>Donors Choose Resources</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-panels.min.js"></script>
+		<script src="js/init.js"></script>
+		<link rel="stylesheet" href="css/dc.css" />
+		<link rel="stylesheet" href="http://cdn.donorschoose.org/gcss/general.css?version=be14f1a" />
+		<link rel="stylesheet" href="css/stylenew.css" />
+		<link rel="stylesheet" href="assets/leaflet/leaflet.css">
+	</head>
+	<body>
+		<div id="wrapper">
+			
+			<!-- Header -->
+			<div id="header">
+				<div class="container"> 
+					
+					<!-- Logo -->
+					<div id="logo" class="12u">
+						<span style="color:#fd8d3c; font-weight: bold; font-zie: 30px">TENDR</span><span style="color:#000; font-weight: bold; font-size: 12">Taking Education National Donations Rural</span>
+					</div>
+					
+					<!-- Nav -->
+
+				</div>
+			</div>
+	
+			<div id="page" style="margin-top:-61px;">
+				<div class="container">
+
+					<div class="row">
+						<div class="12u" style="font-size: 22px; align: center">
+						Thank you for visiting <span style="color:#fd8d3c; font-weight: bold">TENDR</span>, our goal is to help you determine what is the best type of resource request for your school. We break down the data by state, poverty level and grade level.  This is a chance to look at what types of projects (<span style="color:#9ecae1">supplies</span>, <span style="color:#4292c6">books</span>, <span style="color:#deebf7">technology</span>, <span style="color:#f03b20">trips</span>, <span style="color:#fd8d3c">visitors</span>, <span style="color:#6baed6">etc.</span>) have the best chance of being funded, by <a target="_top" style = "color: #EF5F3C;" href="http://www.donorschoose.org/">DonorsChoose.org</a>, for your school.  <br><br><img src="images/right_arrow_orange.png" style="height:20px" align="left">The map and charts are interactive!  You can learn more by clicking and zooming.<br><img src="images/right_arrow_orange.png" style="height:20px" align="left">Get started below by telling us about your class!
+						</div>
+
+				</div>
+			</div>
+			<br>
+			<hr style="border-top: 1px solid #cccc">
+			<br>
+			<div class="container">
+
+				<div class="row">
+					<div class="2u" >
+						<div class="chart-title"> <br> <img src="images/right_arrow_orange.png" style="height:20px" align="left"><strong> Tell us about your class: &nbsp;&nbsp;&nbsp; </strong> </div>					
+					</div>
+					<div class="2u chart-wrapper" id="menuselect" style="background-color: #fecc5c; height: 60px;">
+						<div class="chart-title">  <strong> Grade Level </strong> </div>					
+					</div>
+					<div class="2u chart-wrapper" id="menuselect_poverty" style="background-color: #fecc5c; height: 60px;">
+						<div class="chart-title">  <strong> Poverty Level </strong> </div>
+					</div>
+					<div class="2u chart-wrapper" id="menuselect-state" style="background-color: #fecc5c; height: 60px;">
+						<div class="chart-title">  <strong> State </strong> </div>
+					</div>
+					<div class="1u">
+						<!-- spacer-->
+						&nbsp;
+					</div>
+					<!--
+					<div class="2u chart-wrapper" id="total-projects">
+						<div class="chart-title">  <strong> Total Donation Count </strong> </div>					
+					</div>
+					-->
+					<div class="1u chart-wrapper" id="net-donations">
+						<div class="chart-title">  <strong> Net Donations ($) </strong> </div>		
+					</div>
+					<div class="1u chart-wrapper" id="percent-net-donations">
+						<div class="chart-title">  <strong>  (%) Total </strong> </div>		
+					</div>
+					
+				<!--
+				<div class="3u dc-data-count dc-chart" id="row-selection">
+					<span class="filter-count">_</span> selected out of <span class="total-count">_</span> records |
+					<span>
+						<a href='javascript:dc.filterAll();dc.redrawAll();'><font color="#33CC99">Reset All</font></a>
+					</span>
+				</div>
+				-->		
+
+			</div>
+				<div class="row">
+					<div class="9u chart-wrapper"  id="mymap" style="height: 525px">
+
+					</div>
+					<!--
+					<div class="6u chart-wrapper" id="us-chart">
+						<div class="chart-title">  <strong> Resource Request Locations </strong> </div>							
+					</div>
+-->					
+					<div class="3u chart-wrapper" id="resource-chart">
+						<div class="chart-title">  <strong> Resource Funding Amount </strong> </div>							
+					</div>
+					
+					<div class="3u chart-wrapper" id="funding-chart">
+						<div class="chart-title">  <strong> Funding Status </strong> </div>					
+					</div>
+					
+				</div>
+				<div class="row">
+					<!---
+					<div class="4u chart-wrapper"  id="grade-chart">
+						<div class="chart-title">  <strong> Donation Count by Grade </strong> </div>
+					</div>
+					<div class="4u chart-wrapper" id="poverty-chart">
+						<div class="chart-title">  <strong> Donation Count by Poverty Level</strong></div>							
+
+					</div>
+					--->
+					<div class="3u chart-wrapper" id="rurUrb-chart">
+						<div class="chart-title">  <strong> Rural/Urban </strong> </div>					
+					</div>
+					<div class="9u chart-wrapper"  id="state-donations">
+						<div class="chart-title">  <strong> Donation Amount by State ($) </strong> </div>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class = "12u" style="align: center">
+						<hr style="border-top: 1px solid #cccc">
+						Powered by: <img height="25" align="right" src="https://pbs.twimg.com/profile_images/587980937708883968/nQxrapE5.png"> <a target="_top" style = "color: #EF5F3C;" href="http://www.donorschoose.org/">DonorsChoose.org</a>
+					</div>
+				</div>
+			</div>	
+
+		</div>
+	</div>
+	<script>
+		var globalData = '';
+	</script>
+	<script src="assets/leaflet/leaflet.js"></script>
+	<script src="us-states.js"></script>
+	<script src='js/crossfilter.js' type='text/javascript'></script>
+	<script src='js/d3.js' type='text/javascript'></script>
+	<script src='js/dc.js' type='text/javascript'></script>
+	<script src='js/queue.js' type='text/javascript'></script>
+	<script src='js/Dashboard.js' type='text/javascript'></script>
+
+	<script>
+
+	//L.geoJson(point).addTo(theMap);
+	function style(feature) {
+		return {
+			fillColor: '#74a9cf',
+			weight: .5,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7
+		};
+	}	
+	
+	
+	L.geoJson(statesData, {style: style}).addTo(theMap)	
+	</script>
+	</body>
+</html>
