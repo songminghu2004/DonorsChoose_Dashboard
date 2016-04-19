@@ -38,22 +38,40 @@ path.leaflet-clickable.visitors{
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+                <link rel="stylesheet" href="css/dc.css" />
+		<link rel="stylesheet" href="http://cdn.donorschoose.org/gcss/general.css?version=be14f1a" />
+		<link rel="stylesheet" href="css/stylenew.css" />
+		<link rel="stylesheet" href="assets/leaflet/leaflet.css">
+                <link rel="stylesheet" href="css/introjs.css" />
+                
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-panels.min.js"></script>
 		<script src="js/init.js"></script>
-		<link rel="stylesheet" href="css/dc.css" />
-		<link rel="stylesheet" href="http://cdn.donorschoose.org/gcss/general.css?version=be14f1a" />
-		<link rel="stylesheet" href="css/stylenew.css" />
-		<link rel="stylesheet" href="assets/leaflet/leaflet.css">
+                <script src="js/intro.js" type="text/javascript"></script>
+
+                
+                <style>
+                       .intro_button{
+                        margin-top: 0px;
+                        float: left;
+                        margin-left: 0px;
+                        background-color: #fecc5c;
+                        color: black;
+                        height:60px;
+                        width:180px;
+                        font-weight:bold;
+                        }
+                </style>
 	</head>
 	<body>
 		<div id="wrapper">
 			
 			<!-- Header -->
 			<div id="header">
-				<div class="container"> 
+                                
+                                <div class="container"> 
 					
 					<!-- Logo -->
 					<div id="logo" class="12u">
@@ -70,41 +88,52 @@ path.leaflet-clickable.visitors{
 
 					<div class="row">
 						<div class="12u" style="font-size: 22px; align: center">
-						Thank you for visiting <span style="color:#fd8d3c; font-weight: bold">TENDR</span>, our goal is to help you determine what is the best type of resource request for your school. We break down the data by state, poverty level and grade level.  This is a chance to look at what types of projects (<span style="color:#9ecae1">supplies</span>, <span style="color:#4292c6">books</span>, <span style="color:#deebf7">technology</span>, <span style="color:#f03b20">trips</span>, <span style="color:#fd8d3c">visitors</span>, <span style="color:#6baed6">etc.</span>) have the best chance of being funded, by <a target="_top" style = "color: #EF5F3C;" href="http://www.donorschoose.org/">DonorsChoose.org</a>, for your school.  <br><br><img src="images/right_arrow_orange.png" style="height:20px" align="left">Get started below by telling us about your class!
-						</div>
-				</div>
-			</div>
-			<br>
-			<hr style="border-top: 1px solid #cccc">
-			<br>
-			<div class="container">
+						Thank you for visiting <span style="color:#fd8d3c; font-weight: bold">TENDR</span>, our goal is to help you determine what is the best type of resource request for your school. We break down the data by state, poverty level and grade level.  This is a chance to look at what types of projects (<span style="color:#9ecae1">supplies</span>, <span style="color:#4292c6">books</span>, <span style="color:#deebf7">technology</span>, <span style="color:#f03b20">trips</span>, <span style="color:#fd8d3c">visitors</span>, <span style="color:#6baed6">etc.</span>) have the best chance of being funded, by <a target="_top" style = "color: #EF5F3C;" href="http://www.donorschoose.org/">DonorsChoose.org</a>, for your school.
+                                                <!--
+                                                <br><br><img src="images/right_arrow_orange.png" style="height:20px" align="left">Get started below by telling us about your class!
+                                                -->
+                                                </div>
+                                        </div>
+                                </div>
+                                
+                                <br>
+                                <hr style="border-top: 1px solid #cccc">
+                                <br>
+			
+                                <div class="container">
+                                        <div class="row">
+                                                <div class="2u" >
+                                                        <button class="intro_button" type="button" autofocus onclick="javascript:introJs().setOption('showProgress', true).start();">Start a Step-by-step Tour!</button>  
+                                                        <!--   
+                                                        <div class="chart-title"><br> <img src="images/right_arrow_orange.png" style="height:20px" align="left"><strong> Tell us about your class: &nbsp;&nbsp;&nbsp; </strong> </div>					
+                                                         -->
+                                                </div>                                                
 
-				<div class="row">
-					<div class="2u" >
-						<div class="chart-title"> <br> <img src="images/right_arrow_orange.png" style="height:20px" align="left"><strong> Tell us about your class: &nbsp;&nbsp;&nbsp; </strong> </div>					
-					</div>
-					<div class="2u chart-wrapper" id="menuselect" style="background-color: #fecc5c; height: 60px;">
-						<div class="chart-title">  <strong> Grade Level </strong> </div>					
-					</div>
-					<div class="2u chart-wrapper" id="menuselect_poverty" style="background-color: #fecc5c; height: 60px;">
-						<div class="chart-title">  <strong> Poverty Level </strong> </div>
-					</div>
-					<div class="2u chart-wrapper" id="menuselect-state" style="background-color: #fecc5c; height: 60px;">
-						<div class="chart-title">  <strong> State </strong> </div>
-					</div>
-					<div class="1u">
-						<!-- spacer-->
-						&nbsp;
-					</div>
+                                                <div class="2u chart-wrapper" data-step="1" data-intro="Grade Drop Down - please select one of specific grade levels: 3-5, 6-18, 9-12, PreK-2 or all grades." id="menuselect" style="background-color: #fecc5c; height: 60px;">
+                                                        <div class="chart-title">  <strong> Grade Level </strong> </div>					
+                                                </div>
+					
+                                                <div class="2u chart-wrapper" data-step="2" data-intro="Poverty Drop down - pleae select one of specific poverty levels: highest, high, moderate, low poverty or all data." id="menuselect_poverty" style="background-color: #fecc5c; height: 60px;">
+                                                        <div class="chart-title">  <strong> Poverty Level </strong> </div>
+                                                </div>
+                  
+                                                <div class="2u chart-wrapper" data-step="3" data-intro="State Drop down - please select one of states: CA, NY, IL, NC, SC, TX or all data." id="menuselect-state" style="background-color: #fecc5c; height: 60px;">
+                                                        <div class="chart-title">  <strong> State </strong> </div>
+                                                </div>
+                                            
+                                                <div class="1u">
+                                                        <!-- spacer-->
+                                                        &nbsp;
+                                                </div>
 					<!--
 					<div class="2u chart-wrapper" id="total-projects">
 						<div class="chart-title">  <strong> Total Donation Count </strong> </div>					
 					</div>
 					-->
-					<div class="1u chart-wrapper" id="net-donations">
+					<div class="1u chart-wrapper" data-step="4" data-intro="Widget displays the amount of donation for the selected category." id="net-donations">
 						<div class="chart-title">  <strong> Net Donations ($) </strong> </div>		
 					</div>
-					<div class="1u chart-wrapper" id="percent-net-donations">
+					<div class="1u chart-wrapper" data-step="5" data-intro="Widget displays the percentage of donation for the selected category." id="percent-net-donations">
 						<div class="chart-title">  <strong>  (%) Total </strong> </div>		
 					</div>
 					
@@ -119,7 +148,7 @@ path.leaflet-clickable.visitors{
 
 			</div>
 				<div class="row">
-					<div class="9u chart-wrapper"  id="mymap" style="height: 525px">
+					<div class="9u chart-wrapper" data-step="6" data-intro="The leaflet interactive map. please add more description about the implemented USgeo map here ...." id="mymap" style="height: 525px">
 
 					</div>
 					<!--
@@ -127,11 +156,12 @@ path.leaflet-clickable.visitors{
 						<div class="chart-title">  <strong> Resource Request Locations </strong> </div>							
 					</div>
 -->					
-					<div class="3u chart-wrapper" id="resource-chart">
+					<div class="3u chart-wrapper" data-step="7" data-intro="The interactive bar chart showing the amount donated to the following resource: book, supply, technology, trip, visitor and others types. 
+                                             As shown in the figure, most donated projects are fallen into categories of book, suuply and technology." id="resource-chart">
 						<div class="chart-title">  <strong> Resource Request Amount </strong> </div>							
 					</div>
 					
-					<div class="3u chart-wrapper" id="funding-chart">
+					<div class="3u chart-wrapper" data-step="8" data-intro="The Pie Chart for percentage of donated money with differnt funding status." id="funding-chart">
 						<div class="chart-title">  <strong> Funding Status </strong> </div>					
 					</div>
 					
@@ -146,10 +176,10 @@ path.leaflet-clickable.visitors{
 
 					</div>
 					--->
-					<div class="3u chart-wrapper" id="rurUrb-chart">
+					<div class="3u chart-wrapper" data-step="9" data-intro="The bar chart compares amount of money donated rural, suburban and urban areas. it is not surprised that the urabn area received most donations." id="rurUrb-chart">
 						<div class="chart-title">  <strong> Rural/Urban </strong> </div>					
 					</div>
-					<div class="9u chart-wrapper"  id="state-donations">
+					<div class="9u chart-wrapper"  data-step="10" data-intro="the bar chart shows the donation amount of differnt states.  NY received most donation in the sample dataset." id="state-donations">
 						<div class="chart-title">  <strong> Donation Amount by State ($) </strong> </div>
 					</div>
 
